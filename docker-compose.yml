@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  paymentgateway.api:
+    image: ${DOCKER_REGISTRY-}paymentgateway
+    build:
+      context: .
+      dockerfile: source/PaymentGateway.API/Dockerfile
+
+  ckobank:
+    image: ${DOCKER_REGISTRY-}ckobank
+    build:
+      context: .
+      dockerfile: cko-bank/CKOBank/Dockerfile
+
