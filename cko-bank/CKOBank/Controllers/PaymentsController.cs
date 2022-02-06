@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net.Mime;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CKOBank.Controllers;
 
@@ -14,6 +15,7 @@ public class PaymentsController : ControllerBase
     }
 
     [HttpPost(Name = "ProcessPayment")]
+    [Consumes(MediaTypeNames.Application.Json)]
     public ActionResult<PaymentResponse> ProcessPayment([FromBody]PaymentRequest paymentRequest)
     {
         return new PaymentResponse();

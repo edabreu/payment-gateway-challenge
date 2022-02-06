@@ -17,12 +17,18 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Services\" />
+    <None Remove="FluentValidation.AspNetCore" />
+    <None Remove="Models\" />
+    <None Remove="Models\Validators\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\Validators\" />
   </ItemGroup>
 </Project>
