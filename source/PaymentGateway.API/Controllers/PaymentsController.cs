@@ -1,6 +1,7 @@
 ﻿using System.Net;
+using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
-using PaymentGateway.API.Models;
+using PaymentGateway.API.Dtos;
 using PaymentGateway.API.Services;
 
 namespace PaymentGateway.API.Controllers;
@@ -19,9 +20,13 @@ public class PaymentsController : ControllerBase
     }
 
     [HttpPost(Name = "ProcessPayment")]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(PaymentResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<PaymentResponse>> ProcessPaymentAsync([FromBody]PaymentRequest paymentRequest)
+    public async Task<ActionResult<PaymentResponse>> ProcessPaymentAsync(
+        [FromHeader(Name = "X-merchant_id")] string merchantId,
+        [FromBody]PaymentRequest paymentRequest)
     {
         if (!ModelState.IsValid)
         {
@@ -30,6 +35,28 @@ public class PaymentsController : ControllerBase
 
         _logger.LogInformation("Will process payment request with reference {reference}", new { paymentRequest.Reference });
 
-        return await _paymentService.ProcessAsync(paymentRequest);
+        var paymentResponse = await _paymentService.ProcessAsync(paymentRequest);
+
+        return paymentResponse;
+        /*return CreatedAtAction(
+            nameof(GetPaymentDetailsAsync),
+            new { merchantId = merchantId, id = paymentResponse.Id },
+            paymentResponse);/**/
     }
+
+    /*[HttpGet("{reference}", Name = "GetPaymentDetails")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(PaymentResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<PaymentResponse>> GetPaymentDetailsAsync(
+        [FromHeader(Name = "X-merchant_id")] string merchantId,
+        [FromRoute] string id)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        return new PaymentResponse();
+    }/**/
 }

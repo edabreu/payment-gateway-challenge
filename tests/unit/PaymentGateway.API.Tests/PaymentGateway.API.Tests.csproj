@@ -29,8 +29,12 @@
     <None Remove="Moq" />
     <None Remove="FluentAssertions" />
     <None Remove="Properties\" />
+    <None Remove="Models\" />
+    <None Remove="Models\Validators\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\Validators\" />
   </ItemGroup>
 </Project>

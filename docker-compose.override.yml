@@ -1,23 +1,23 @@
 version: '3.4'
 
 services:
-  paymentgateway.api:
+  paymentgateway-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - GATEWAYSETTINGS__CKOBANK__ENDPOINT=http://ckobank/
+      - MONGOSETTINGS__CONNECTIONSTRING=mongodb://mongo:27017/PAYMENTS_GATEWAY
     ports:
-      - "80"
-      - "443"
-    volumes:
-      - ~/.aspnet/https:/root/.aspnet/https:ro
-      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - "5001:80"
+
   ckobank:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_URLS=http://+:80
     ports:
-      - "80"
-      - "443"
-    volumes:
-      - ~/.aspnet/https:/root/.aspnet/https:ro
-      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - "5002:80"
+
+  cardtokenizer-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5003:80"

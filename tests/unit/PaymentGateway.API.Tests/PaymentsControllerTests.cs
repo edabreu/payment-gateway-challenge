@@ -8,8 +8,9 @@ using Moq;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using PaymentGateway.API.Services;
-using PaymentGateway.API.Models;
+using PaymentGateway.API.Dtos;
 using System.Threading.Tasks;
+using System;
 
 namespace PaymentGateway.API.Tests;
 
@@ -27,24 +28,34 @@ public class PaymentsControllerTests
     [Fact]
     public async Task Processing_payment_request_should_return_payment_response()
     {
-        var request = new PaymentRequest();
+        const string MerchantId = "merchant";
+        var request = new PaymentRequest { Reference = "CKO-Payment-01" };
         var expectedResponse = new PaymentResponse();
         _paymentServiceMock.Setup(paymentService => paymentService.ProcessAsync(request))
             .ReturnsAsync(expectedResponse);
 
-        var result = await _controller.ProcessPaymentAsync(request);
+        var result = await _controller.ProcessPaymentAsync(MerchantId, request);
 
         result.Should().BeOfType<ActionResult<PaymentResponse>>()
+            .Which.Result.Should().BeOfType<CreatedAtActionResult>()
             .Which.Value.Should().Be(expectedResponse);
+        _loggerMock.Verify(logger => logger.Log(
+            LogLevel.Information,
+            It.Is<EventId>(eventId => eventId.Id == 0),
+            It.Is<It.IsAnyType>((@object, @type) => @object.ToString() == "Will process payment request with reference { Reference = CKO-Payment-01 }" && @type.Name == "FormattedLogValues"),
+            It.IsAny<Exception>(),
+            It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+        Times.Once);
     }
 
     [Fact]
     public async Task Processing_invalid_payment_request_should_return_bad_request()
     {
+        const string MerchantId = "merchant";
         var request = new PaymentRequest();
         _controller.ModelState.AddModelError("CardDetails", "CardDetails cannot be null");
 
-        var result = await _controller.ProcessPaymentAsync(request);
+        var result = await _controller.ProcessPaymentAsync(MerchantId, request);
 
         result.Should().BeOfType<ActionResult<PaymentResponse>>()
             .Which.Result.Should().BeOfType<BadRequestObjectResult>();

@@ -8,6 +8,10 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["source/PaymentGateway.API/PaymentGateway.API.csproj", "source/PaymentGateway.API/"]
+COPY ["source/Data.Gateways/Data.Gateways.csproj", "source/Data.Gateways/"]
+COPY ["source/Data.Repositories/Data.Repositories.csproj", "source/Data.Repositories/"]
+COPY ["source/Domain.Abstractions/Domain.Abstractions.csproj", "source/Domain.Abstractions/"]
+COPY ["source/Domain.Models/Domain.Models.csproj", "source/Domain.Models/"]
 RUN dotnet restore "source/PaymentGateway.API/PaymentGateway.API.csproj"
 COPY . .
 WORKDIR "/src/source/PaymentGateway.API"

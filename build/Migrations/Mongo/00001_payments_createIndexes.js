@@ -1,0 +1,1 @@
+db.getCollection("payments").createIndex({ "merchantId": -1 }, { unique: false, name: "merchantId desc" });

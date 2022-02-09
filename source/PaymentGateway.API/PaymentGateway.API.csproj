@@ -21,14 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Services\" />
-    <None Remove="FluentValidation.AspNetCore" />
-    <None Remove="Models\" />
-    <None Remove="Models\Validators\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Models\" />
-    <Folder Include="Models\Validators\" />
+    <ProjectReference Include="..\Data.Repositories\Data.Repositories.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.Gateways\Data.Gateways.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

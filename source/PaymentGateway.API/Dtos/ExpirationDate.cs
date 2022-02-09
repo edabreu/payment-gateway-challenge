@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway.API.Models;
+﻿namespace PaymentGateway.API.Dtos;
 
 public class ExpirationDate
 {
