@@ -10,11 +10,15 @@ public static class IServiceCollectionExtensions
 {
     public static IServiceCollection AddGateways(this IServiceCollection services, IConfiguration configuration)
     {
-        var gateways = new GatewaySettings();
-        configuration.GetSection(nameof(GatewaySettings)).Bind(gateways);
+        var gateways = new GatewayOptions();
+        configuration.GetSection(nameof(GatewayOptions)).Bind(gateways);
         services.AddHttpClient<ICkoBankService, CkoBankService>(client =>
         {
             client.BaseAddress = new Uri(gateways.CkoBank.Endpoint);
+        });
+        services.AddHttpClient<ICardTokenizerService, CardTokenizerService>(client =>
+        {
+            client.BaseAddress = new Uri(gateways.CardTokenizer.Endpoint);
         });
 
         return services;

@@ -21,7 +21,8 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPaymentService, PaymentService>()
-    .AddGateways(builder.Configuration);
+    .AddGateways(builder.Configuration)
+    .AddRepositories(builder.Configuration);
 
 var app = builder.Build();
 

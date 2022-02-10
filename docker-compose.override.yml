@@ -4,8 +4,9 @@ services:
   paymentgateway-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - GATEWAYSETTINGS__CKOBANK__ENDPOINT=http://ckobank/
-      - MONGOSETTINGS__CONNECTIONSTRING=mongodb://mongo:27017/PAYMENTS_GATEWAY
+      - GATEWAYOPTIONS__CARDTOKENIZER__ENDPOINT=http://cardtokenizer-api/
+      - GATEWAYOPTIONS__CKOBANK__ENDPOINT=http://ckobank/
+      - MONGOOPTIONS__CONNECTIONSTRING=mongodb://mongo:27017/PAYMENTS_GATEWAY
     ports:
       - "5001:80"
 

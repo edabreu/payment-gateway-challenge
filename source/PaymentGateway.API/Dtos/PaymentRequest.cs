@@ -2,8 +2,8 @@
 
 public class PaymentRequest
 {
-    public string Reference { get; set; } = string.Empty;
+    public string Reference { get; set; } = null!;
     public int Amount { get; set; }
-    public string Currency { get; set; } = string.Empty;
-    public CardDetails? CardDetails { get; set; }
+    public string Currency { get; set; } = null!;
+    public CardDetails? CardDetails { get; set; } = default!;
 }

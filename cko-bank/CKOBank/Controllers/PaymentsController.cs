@@ -16,7 +16,7 @@ public class PaymentsController : ControllerBase
         _availableCards = new Dictionary<string, CardProcessingResultInformation>
         {
             { "1234567890123452", new("1234567890123452", true, "Authorized") },
-            { "4643335951477921", new("4643335951477921", true, "InsuficientFunds") },
+            { "4643335951477921", new("4643335951477921", false, "InsuficientFunds") },
         };
         _logger = logger;
     }

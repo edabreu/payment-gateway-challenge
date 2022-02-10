@@ -45,7 +45,9 @@ public class CkoBankService : ICkoBankService
             await httpResponse.Content.ReadAsStreamAsync(),
             _serializerOptions);
 
-        _logger.LogInformation($"Received from Cko Bank {JsonSerializer.Serialize(bankResponse)}");
+        _logger.LogInformation(
+            "Received from Cko Bank payment {@response}",
+            new { bankResponse.PaymentId, bankResponse.Status });
 
         return new Payment(
             bankResponse.PaymentId,
