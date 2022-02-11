@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CardTokenizer.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("card-tokens")]
 public class TokensController : ControllerBase
 {
     private readonly ILogger<TokensController> _logger;
@@ -17,7 +17,7 @@ public class TokensController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPost(Name = "tokens")]
+    [HttpPost(Name = "TokenizeCard")]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(TokenizeCardResponse), (int)HttpStatusCode.OK)]

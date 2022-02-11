@@ -16,8 +16,7 @@ public abstract class BaseRepository<T>
     public BaseRepository(IMongoClient mongoClient, IOptions<MongoOptions> mongoOptions)
     {
         _mongoClient = mongoClient;
-        var mongoUrl = new MongoUrl(mongoOptions.Value.ConnectionString);
-        Collection = mongoClient.GetDatabase(mongoUrl.DatabaseName)
+        Collection = mongoClient.GetDatabase(mongoOptions.Value.DatabaseName)
             .GetCollection<T>(CollectionName);
     }
 

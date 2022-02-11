@@ -7,6 +7,11 @@ public static class PaymentExtensions
 {
     public static Dbos.Payment ToDbo(this Domain.Models.Payment payment)
     {
+        if (payment is null)
+        {
+            return default!;
+        }
+
         return new Dbos.Payment
         {
             Amount = payment.Amount,
@@ -15,6 +20,7 @@ public static class PaymentExtensions
             Currency = payment.Currency,
             Id = new ObjectId(payment.Id ?? Guid.NewGuid().ToString("N")),
             ProcessingId = payment.ProcessingId,
+            Merchant = payment.Merchant,
             Reference = payment.Reference,
             Status = payment.Status
         };
@@ -22,11 +28,17 @@ public static class PaymentExtensions
 
     public static Domain.Models.Payment ToModel(this Dbos.Payment payment)
     {
+        if (payment is null)
+        {
+            return default!;
+        }
+
         return new Domain.Models.Payment(
             id: payment.Id.ToString(),
             processingId: payment.ProcessingId,
             approved: payment.Approved,
             status: payment.Status,
+            merchant: payment.Merchant,
             reference: payment.Reference,
             amount: payment.Amount,
             currecy: payment.Currency,

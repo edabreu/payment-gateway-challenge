@@ -37,7 +37,7 @@ public class CardTokenizerService : ICardTokenizerService
             JsonSerializer.Serialize(tokenizeCardRequest, _serializerOptions),
             System.Text.Encoding.UTF8,
             MediaTypeNames.Application.Json);
-        var httpResponse = await _httpClient.PostAsync("tokens", content);
+        var httpResponse = await _httpClient.PostAsync("card-tokens", content);
 
         var tokenizeCardResponse = await JsonSerializer.DeserializeAsync<TokenizeCardResponse>(
             await httpResponse.Content.ReadAsStreamAsync(),

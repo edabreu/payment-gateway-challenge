@@ -28,4 +28,10 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Dtos\Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dtos\Extensions\" />
+  </ItemGroup>
 </Project>

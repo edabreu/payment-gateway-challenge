@@ -6,7 +6,7 @@ using PaymentGateway.API.Dtos;
 using PaymentGateway.API.Dtos.Validators;
 using Xunit;
 
-namespace PaymentGateway.API.Tests.Models.Validators;
+namespace PaymentGateway.API.Tests.Dtos.Validators;
 
 public class PaymentRequestValidatorTests
 {
@@ -25,7 +25,7 @@ public class PaymentRequestValidatorTests
 		var result = _validator.TestValidate(paymentRequest)!;
 
 		result.ShouldHaveValidationErrorFor(model => model.CardDetails).WithErrorMessage("'Card Details' must not be empty.");
-		result.ShouldHaveValidationErrorFor(model => model.Currency).WithErrorMessage("'Currency' must be 3 characters in length. You entered 0 characters.");
+		result.ShouldHaveValidationErrorFor(model => model.Currency).WithErrorMessage("'Currency' must not be empty.");
 		result.ShouldHaveValidationErrorFor(model => model.Reference);
 	}
 

@@ -8,6 +8,6 @@ public class CardToken
 	public string Token { get; set; } = null!;
 	public string NumberLast4 { get; set; } = null!;
 	public string HolderName { get; set; } = null!;
-	ExpirationDate ExpirationDate { get; set; } = default!;
+	public ExpirationDate ExpirationDate { get; set; } = default!;
 }
 

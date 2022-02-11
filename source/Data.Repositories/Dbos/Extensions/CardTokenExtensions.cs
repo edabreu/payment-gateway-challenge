@@ -6,6 +6,11 @@ public static class CardTokenExtensions
 {
     public static Dbos.CardToken ToDbo(this Domain.Models.CardToken cardToken)
     {
+        if (cardToken is null)
+        {
+            return default!;
+        }
+
         return new Dbos.CardToken
         {
             ExpirationDate = cardToken.ExpirationDate.ToDbo(),
@@ -18,6 +23,11 @@ public static class CardTokenExtensions
 
     public static Domain.Models.CardToken ToModel(this Dbos.CardToken cardToken)
     {
+        if (cardToken is null)
+        {
+            return default!;
+        }
+
         return new Domain.Models.CardToken(
             Id: cardToken.Id,
             Token: cardToken.Token,

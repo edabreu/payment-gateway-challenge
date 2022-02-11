@@ -53,6 +53,7 @@ public class CkoBankService : ICkoBankService
             bankResponse.PaymentId,
             bankResponse.Approved,
             bankResponse.Status,
+            paymentRequest.Merchant,
             paymentRequest.Reference,
             paymentRequest.Amount,
             paymentRequest.Currency);

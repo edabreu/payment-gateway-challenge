@@ -37,6 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mongo", "Mongo", "{F210C391
 	ProjectSection(SolutionItems) = preProject
 		build\Migrations\Mongo\run-scripts.sh = build\Migrations\Mongo\run-scripts.sh
 		build\Migrations\Mongo\00001_payments_createIndexes.js = build\Migrations\Mongo\00001_payments_createIndexes.js
+		build\Migrations\Mongo\00002_payments_seed.js = build\Migrations\Mongo\00002_payments_seed.js
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Repositories", "source\Data.Repositories\Data.Repositories.csproj", "{E758A121-41D8-4701-B5EA-78ED8811D214}"

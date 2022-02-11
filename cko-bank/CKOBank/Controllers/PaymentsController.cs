@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CKOBank.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("payments")]
 public class PaymentsController : ControllerBase
 {
     private readonly ILogger<PaymentsController> _logger;

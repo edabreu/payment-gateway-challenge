@@ -23,8 +23,8 @@ public class PaymentsController : ControllerBase
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(PaymentResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<PaymentResponse>> ProcessPaymentAsync(
+    [ProducesResponseType(typeof(Payment), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> ProcessPaymentAsync(
         [FromHeader(Name = "X-merchant_id")] string merchantId,
         [FromBody]PaymentRequest paymentRequest)
     {
@@ -35,20 +35,22 @@ public class PaymentsController : ControllerBase
 
         _logger.LogInformation("Will process payment request with reference {reference}", new { paymentRequest.Reference });
 
-        var paymentResponse = await _paymentService.ProcessAsync(paymentRequest);
+        var paymentResponse = await _paymentService.ProcessAsync(merchantId, paymentRequest);
 
-        return paymentResponse;
-        /*return CreatedAtAction(
-            nameof(GetPaymentDetailsAsync),
-            new { merchantId = merchantId, id = paymentResponse.Id },
-            paymentResponse);/**/
+        return CreatedAtAction(
+            "GetPaymentDetails",
+            new { id = paymentResponse.Id },
+            paymentResponse);
     }
 
-    /*[HttpGet("{reference}", Name = "GetPaymentDetails")]
+    [HttpGet("{id}", Name = "GetPaymentDetails")]
+    [ActionName("GetPaymentDetails")]
     [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType(typeof(PaymentResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<PaymentResponse>> GetPaymentDetailsAsync(
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(Payment), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetPaymentDetailsAsync(
         [FromHeader(Name = "X-merchant_id")] string merchantId,
         [FromRoute] string id)
     {
@@ -57,6 +59,17 @@ public class PaymentsController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        return new PaymentResponse();
-    }/**/
+        var payment = await _paymentService.GetAsync(id);
+
+        if (payment is null)
+        {
+            return NotFound();
+        }
+        else if (!string.Equals(payment.Merchant, merchantId))
+        {
+            return Unauthorized();
+        }
+
+        return Ok(payment);
+    }
 }

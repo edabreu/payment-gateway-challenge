@@ -1,24 +1,24 @@
 ﻿using System;
 
-namespace Data.Repositories.Dbos.Extensions;
+namespace PaymentGateway.API.Dtos.Extensions;
 
 public static class ExpirationDateExtensions
 {
-    public static Dbos.ExpirationDate ToDbo(this Domain.Models.ExpirationDate expirationDate)
+    public static Dtos.ExpirationDate ToDto(this Domain.Models.ExpirationDate expirationDate)
     {
         if (expirationDate is null)
         {
             return default!;
         }
 
-        return new Dbos.ExpirationDate
+        return new Dtos.ExpirationDate
         {
             Month = expirationDate.Month,
             Year = expirationDate.Year
         };
     }
 
-    public static Domain.Models.ExpirationDate ToModel(this Dbos.ExpirationDate expirationDate)
+    public static Domain.Models.ExpirationDate ToModel(this Dtos.ExpirationDate expirationDate)
     {
         if (expirationDate is null)
         {

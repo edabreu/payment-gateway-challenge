@@ -2,6 +2,7 @@
 using Domain.Abstractions.Gateways;
 using Domain.Abstractions.Repositories;
 using PaymentGateway.API.Dtos;
+using PaymentGateway.API.Dtos.Extensions;
 
 namespace PaymentGateway.API.Services;
 
@@ -21,20 +22,9 @@ public class PaymentService : IPaymentService
         _paymentsRepository = paymentsRepository;
     }
 
-    public async Task<PaymentResponse> ProcessAsync(PaymentRequest paymentRequest)
+    public async Task<Payment> ProcessAsync(string merchant, PaymentRequest paymentRequest)
     {
-        var request = new Domain.Models.PaymentRequest(
-            paymentRequest.Reference,
-            paymentRequest.Amount,
-            paymentRequest.Currency,
-            new Domain.Models.CardDetails(
-                paymentRequest.CardDetails.Number,
-                new Domain.Models.ExpirationDate(
-                    paymentRequest.CardDetails.ExpirationDate.Month,
-                    paymentRequest.CardDetails.ExpirationDate.Year),
-                paymentRequest.CardDetails.CVV,
-                paymentRequest.CardDetails.HolderName));
-
+        var request = paymentRequest.ToModel(merchant);
         var paymentTask = _bankService.ProcessPaymentAsync(request);
         var cardTokenizerTask = _cardTokenizerService.TokenizeCardAsync(request.CardDetails);
 
@@ -42,23 +32,15 @@ public class PaymentService : IPaymentService
         var payment = paymentTask.Result;
         payment.SetCardToken(cardTokenizerTask.Result);
 
-        await _paymentsRepository.InsertAsync(payment);
+        payment = await _paymentsRepository.InsertAsync(payment);
 
-        return new PaymentResponse
-        {
-            Approved = payment.Approved,
-            CardToken = new CardToken
-            {
-                HolderName = payment.CardToken.HolderName,
-                Id = payment.CardToken.Id,
-                NumberLast4 = payment.CardToken.NumberLast4,
-                Token = payment.CardToken.Token
-            },
-            Id = payment.Id,
-            ProcessingId = payment.ProcessingId,
-            Reference = payment.Reference,
-            Status = payment.Status
-        };
+        return payment.ToDto();
+    }
+
+    public async Task<Payment> GetAsync(string id)
+    {
+        var payment = await _paymentsRepository.GetAsync(id);
+        return payment.ToDto();
     }
 }
 

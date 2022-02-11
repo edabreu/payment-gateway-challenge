@@ -1,1 +1,2 @@
-db.getCollection("payments").createIndex({ "merchantId": -1 }, { unique: false, name: "merchantId desc" });
+db.getCollection("payments").createIndex({ "Merchant": 1 }, { unique: false, name: "merchantId asc" });
+db.getCollection("payments").createIndex({ "Merchant": 1, "Reference": 1 }, { unique: true, name: "merchantId asc, and Reference asc" });
