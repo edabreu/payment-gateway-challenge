@@ -15,8 +15,6 @@ services:
     image: mongo
     container_name: ${DOCKER_REGISTRY-}mongo-migrations
     restart: on-failure:2
-    ports:
-      - 27018:27018
     depends_on:
       - mongo
     volumes:

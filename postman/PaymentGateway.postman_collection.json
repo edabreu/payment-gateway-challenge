@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "process payment",
+			"name": "process payment [Port 5001]",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -41,7 +41,7 @@
 			"response": []
 		},
 		{
-			"name": "get payment",
+			"name": "get payment [Port 5001]",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -58,6 +58,67 @@
 						"localhost"
 					],
 					"port": "5001",
+					"path": [
+						"Payments",
+						"00eecb99b41848a28b6434bf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "process payment [Port 5201 - Debug]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-merchant_id",
+						"value": "merch-00001",
+						"description": "The merchant identifier that would be present on the auth token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"reference\": \"my-ref7\",\n  \"amount\": 123456,\n  \"currency\": \"EUR\",\n  \"cardDetails\": {\n    \"number\": \"1234567890123452\",\n    \"expirationDate\": {\n      \"month\": 12,\n      \"year\": 2022\n    },\n    \"cvv\": \"312\",\n    \"holderName\": \"Eduardo Abreu\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5201/Payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5201",
+					"path": [
+						"Payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get payment [Port 5201 - Debug]",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-merchant_id",
+						"value": "merch-1234-2341",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5201/Payments/00eecb99b41848a28b6434bf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5201",
 					"path": [
 						"Payments",
 						"00eecb99b41848a28b6434bf"

@@ -1,0 +1,20 @@
+@startuml
+participant Merchant as merc
+participant PaymentGateway as pg
+database Mongo as db
+participant CardTokenizer as ct
+participant CKOBank as bnk
+
+merc -> pg : [POST] Payment request
+activate pg
+pg -> ct : [POST] Tokenize card
+activate ct
+pg <-- ct : Card token
+deactivate ct
+pg -> bnk : [POST] Payment request
+activate bnk
+pg <-- bnk : payment response
+deactivate bnk
+pg -> db : persiste payment
+merc <-- pg : payment response
+@enduml

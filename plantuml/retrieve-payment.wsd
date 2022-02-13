@@ -1,0 +1,13 @@
+@startuml
+participant Merchant as merc
+participant PaymentGateway as pg
+database Mongo as db
+
+merc -> pg : [Get] Payment
+activate pg
+pg -> db : Query payments using id
+activate db
+pg <-- db : payment details
+deactivate db
+merc <-- pg : payment response
+@enduml
