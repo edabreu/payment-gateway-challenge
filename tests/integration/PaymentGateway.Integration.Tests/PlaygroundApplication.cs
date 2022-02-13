@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Xunit;
 
-namespace payment_gateway_challenge.Integration.Tests;
+namespace PaymentGateway.Integration.Tests;
 
 public class PlaygroundApplication : WebApplicationFactory<Program>
 {
@@ -13,7 +13,6 @@ public class PlaygroundApplication : WebApplicationFactory<Program>
 
         builder.ConfigureServices((context, services) =>
         {
-            // cenas
         });
 
         return base.CreateHost(builder);

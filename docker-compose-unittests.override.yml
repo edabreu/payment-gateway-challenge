@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  payment-gateway-api-unit-test:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    entrypoint:
+      - dotnet
+      - test
+      - --filter="Category=Unit"
+      - --logger:"console;verbosity=normal"
+      - payment-gateway-challenge.sln

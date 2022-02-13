@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Text.Json;
 
-namespace payment_gateway_challenge.Integration.Tests;
+namespace PaymentGateway.Integration.Tests;
 
 public class TestFixture : IDisposable
 {
@@ -13,15 +13,10 @@ public class TestFixture : IDisposable
 	{
         _application = new();
         HttpClient = _application.CreateClient();
-        SerializerOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        };
     }
 
     public IServiceProvider ServiceProvider => _application.Services;
     public HttpClient HttpClient { get; }
-    public JsonSerializerOptions SerializerOptions { get; }
 
     protected virtual void Dispose(bool disposing)
     {

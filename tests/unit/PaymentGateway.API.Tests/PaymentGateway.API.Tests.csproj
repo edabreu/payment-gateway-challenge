@@ -27,16 +27,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\source\PaymentGateway.API\PaymentGateway.API.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Controllers\" />
-    <None Remove="Services\" />
-    <None Remove="AutoFixture" />
-    <None Remove="FluentValidation" />
-    <None Remove="Dtos\Extensions\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Services\" />
-    <Folder Include="Dtos\Extensions\" />
-  </ItemGroup>
 </Project>

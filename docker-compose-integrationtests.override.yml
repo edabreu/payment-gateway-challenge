@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  payment-gateway-api-integration-test:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - GATEWAYOPTIONS__CARDTOKENIZER__ENDPOINT=http://cardtokenizer-api/
+      - GATEWAYOPTIONS__CKOBANK__ENDPOINT=http://ckobank/
+      - MONGOOPTIONS__CONNECTIONSTRING=mongodb://mongo:27017/PAYMENTS_GATEWAY
+    entrypoint:
+      - dotnet
+      - test
+      - --filter="Category=Integration"
+      - --logger:"console;verbosity=normal"
+      - payment-gateway-challenge.sln
+
+  ckobank:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5002:80"
+
+  cardtokenizer-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5003:80"

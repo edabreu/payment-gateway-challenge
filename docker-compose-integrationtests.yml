@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+  mongo:
+    hostname: mongo
+    container_name: ${DOCKER_REGISTRY-}mongo
+    restart: on-failure:2
+    image: mongo
+    expose:
+        - 27017
+    ports:
+        - 27017:27017
+
+  mongo-migrations:
+    image: mongo
+    container_name: ${DOCKER_REGISTRY-}mongo-migrations
+    restart: on-failure:2
+    ports:
+      - 27018:27018
+    depends_on:
+      - mongo
+    volumes:
+      - ./build/Migrations/Mongo:/migration-scripts
+    entrypoint: "bash -c '/migration-scripts/run-scripts.sh'"
+
+  mongo-express:
+    image: mongo-express:0.54.0
+    restart: on-failure:2
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+
+  ckobank:
+    image: ${DOCKER_REGISTRY-}ckobank
+    build:
+      context: .
+      dockerfile: cko-bank/CKOBank/Dockerfile
+
+  cardtokenizer-api:
+    image: ${DOCKER_REGISTRY-}cardtokenizer
+    build:
+      context: .
+      dockerfile: card-tokenizer/CardTokenizer.API/Dockerfile
+
+  payment-gateway-api-integration-test:
+    image: ${DOCKER_REGISTRY-}payment-gateway-api-integration-test
+    depends_on:
+      - ckobank
+      - cardtokenizer-api
+      - mongo
+    build:
+      context: .
+      dockerfile: source/PaymentGateway.API/Dockerfile
+      target: test
+

@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  payment-gateway-api-unit-test:
+    image: ${DOCKER_REGISTRY-}payment-gateway-api-unit-test
+    build:
+      context: .
+      dockerfile: source/PaymentGateway.API/Dockerfile
+      target: test
+
