@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Data.Repositories;
 using Data.Repositories.Options;
 using Domain.Abstractions.Repositories;
@@ -9,6 +10,7 @@ using MongoDB.Driver;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+[ExcludeFromCodeCoverage]
 public static class IServiceCollectionExtensions
 {
 	public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration)

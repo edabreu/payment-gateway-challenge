@@ -3,9 +3,11 @@ using Domain.Abstractions.Gateways;
 using Data.Gateways;
 using Data.Gateways.Options;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+[ExcludeFromCodeCoverage]
 public static class IServiceCollectionExtensions
 {
     public static IServiceCollection AddGateways(this IServiceCollection services, IConfiguration configuration)

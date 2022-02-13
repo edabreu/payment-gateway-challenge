@@ -44,6 +44,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Repositories", "source
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Gateways", "source\Data.Gateways\Data.Gateways.csproj", "{B140F984-3E34-4B5E-A422-9D1B8DEEB24B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "payment-gateway-challenge.Integration.Tests", "tests\integration\payment-gateway-challenge.Integration.Tests\payment-gateway-challenge.Integration.Tests.csproj", "{82716975-AE14-4F77-AF0B-8C4B89B56FA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Repositories.Tests", "tests\unit\Data.Repositories.Tests\Data.Repositories.Tests.csproj", "{457C59F1-EF0A-4E69-8ACD-D99CCE8B32FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +90,14 @@ Global
 		{B140F984-3E34-4B5E-A422-9D1B8DEEB24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B140F984-3E34-4B5E-A422-9D1B8DEEB24B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B140F984-3E34-4B5E-A422-9D1B8DEEB24B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82716975-AE14-4F77-AF0B-8C4B89B56FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82716975-AE14-4F77-AF0B-8C4B89B56FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82716975-AE14-4F77-AF0B-8C4B89B56FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82716975-AE14-4F77-AF0B-8C4B89B56FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{457C59F1-EF0A-4E69-8ACD-D99CCE8B32FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{457C59F1-EF0A-4E69-8ACD-D99CCE8B32FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{457C59F1-EF0A-4E69-8ACD-D99CCE8B32FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{457C59F1-EF0A-4E69-8ACD-D99CCE8B32FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,5 +118,7 @@ Global
 		{F210C391-95EC-4792-B425-E7E64B4D30C4} = {001FB414-B2BB-42FD-83E9-7EB70483CFFD}
 		{E758A121-41D8-4701-B5EA-78ED8811D214} = {619DD646-8D77-4A41-879E-B286F940F40B}
 		{B140F984-3E34-4B5E-A422-9D1B8DEEB24B} = {619DD646-8D77-4A41-879E-B286F940F40B}
+		{82716975-AE14-4F77-AF0B-8C4B89B56FA9} = {61C0C475-D996-475E-9953-AF3962BD5283}
+		{457C59F1-EF0A-4E69-8ACD-D99CCE8B32FE} = {9423C6B7-0CFB-41B3-9FBC-8C087AE0F7A4}
 	EndGlobalSection
 EndGlobal

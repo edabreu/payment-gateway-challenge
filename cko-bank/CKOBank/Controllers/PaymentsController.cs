@@ -1,4 +1,5 @@
-﻿using System.Net.Mime;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace CKOBank.Controllers;
 
 [ApiController]
 [Route("payments")]
+[ExcludeFromCodeCoverage]
 public class PaymentsController : ControllerBase
 {
     private readonly ILogger<PaymentsController> _logger;

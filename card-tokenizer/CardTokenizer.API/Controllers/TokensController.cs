@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
@@ -8,6 +9,7 @@ namespace CardTokenizer.API.Controllers;
 
 [ApiController]
 [Route("card-tokens")]
+[ExcludeFromCodeCoverage]
 public class TokensController : ControllerBase
 {
     private readonly ILogger<TokensController> _logger;

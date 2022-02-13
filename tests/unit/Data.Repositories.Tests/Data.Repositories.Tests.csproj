@@ -18,25 +18,23 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="FluentAssertions" Version="6.4.0" />
     <PackageReference Include="AutoFixture" Version="4.17.0" />
-    <PackageReference Include="FluentValidation" Version="10.3.6" />
+    <PackageReference Include="FluentAssertions" Version="6.5.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\source\PaymentGateway.API\PaymentGateway.API.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Controllers\" />
-    <None Remove="Services\" />
+    <None Remove="Properties\" />
+    <None Remove="Extensions\" />
+    <None Remove="Dbos\Extensions\" />
     <None Remove="AutoFixture" />
-    <None Remove="FluentValidation" />
-    <None Remove="Dtos\Extensions\" />
+    <None Remove="FluentAssertions" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Services\" />
-    <Folder Include="Dtos\Extensions\" />
+    <Folder Include="Properties\" />
+    <Folder Include="Dbos\" />
+    <Folder Include="Dbos\Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\source\Data.Repositories\Data.Repositories.csproj" />
   </ItemGroup>
 </Project>
